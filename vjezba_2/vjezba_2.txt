@@ -1,0 +1,277 @@
+Zadatak 1
+
+- U radnom okruženju stvorite direktorije vjezba_2/data i vjezba_2/backup koristeći dvije naredbe mkdir.
+
+# ODGOVOR:
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe# mkdir vjezba_2
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe# ls -l
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 20:27 vjezba_1
+drwxrwxrwx 1 user user 512 Apr  2 20:28 vjezba_2
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe# mkdir vjezba_2/data && mkdir vjezba_2/backup
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe# cd vjezba_2/
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2# ls -l
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 20:28 backup
+drwxrwxrwx 1 user user 512 Apr  2 20:28 data
+
+- Unutar direktorija data stvorite sljedeće datoteke:
+
+script.js
+style.css
+.env
+
+# ODGOVOR:
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2# cd data/
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# touch script.js style.css .env
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# ls -la
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 20:36 .
+drwxrwxrwx 1 user user 512 Apr  2 20:31 ..
+-rwxrwxrwx 1 user user   0 Apr  2 20:36 .env
+-rwxrwxrwx 1 user user   0 Apr  2 20:36 script.js
+-rwxrwxrwx 1 user user   0 Apr  2 20:36 style.css
+
+
+- Naredbom echo unesite sljedeći sadržaj u datoteke:
+
+script.js: console.log("Hello, World!")
+style.css: body { background-color: #f0f0f0; }
+.env: VJEZBE=OS
+
+# ODGOVOR: 
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# echo 'console.log("Hello, World")' > script.js 
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# more script.js 
+console.log("Hello, World")
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# echo 'body { background-color: #f0f0f0; }' > style.css 
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# more style.css 
+body { background-color: #f0f0f0; }
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# echo VJEZBE-OS > .env
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# more .env 
+VJEZBE-OS
+
+
+Zadatak 2
+
+- Kopirajte sav sadržaj direktorija data u direktorij backup koristeći odgovarajuću naredbu. Ispišite detalje o radnji.
+
+ # Prvo listam sve datoteke u direktoriju backup. Nema ih.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# ls -la ../backup/
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 20:46 .
+drwxrwxrwx 1 user user 512 Apr  2 20:31 ..
+
+ # Zatim listam sve datoteke u lokalnom direktoriju data. Tri su, prethodno izrađene.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# ls -la
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 20:42 .
+drwxrwxrwx 1 user user 512 Apr  2 20:31 ..
+-rwxrwxrwx 1 user user  10 Apr  2 20:41 .env
+-rwxrwxrwx 1 user user  28 Apr  2 20:39 script.js
+-rwxrwxrwx 1 user user  36 Apr  2 20:40 style.css
+
+ # Zatim koristim naredbu cp za kopiranje datoteka sa zastavicom -r koja uključuje i poddirektorije i datoteke u njima, ako ih ima u izvornom direktoriju. Jednostavnije, to znači da će kopirati sve. Točka označava da kopira sve datoteke, pa i one skrivene.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# cp -r . ../backup/
+
+ # Na kraju prikazujem listu svih datoteka koje su kopirane u drugom direktoriju backup, ali sam listao iz direktorija data.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# ls -la ../backup/
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 20:47 .
+drwxrwxrwx 1 user user 512 Apr  2 20:31 ..
+-rwxrwxrwx 1 user user  10 Apr  2 20:47 .env
+-rwxrwxrwx 1 user user  28 Apr  2 20:47 script.js
+-rwxrwxrwx 1 user user  36 Apr  2 20:47 style.css
+
+
+Prebacite se u direktorij data i napravite detaljan ispis direktorija backup. Ispis mora biti detaljan, uključivati sve skrivene datoteke i biti sortiran po veličini.
+
+ # Detaljan ispis sadržaja direktorija dobijemo sa zastavicom -l, uključivanje svih i onih nevidljivih datoteka dobijemo sa zastavicom -a, a sortiranje datoteka po veličini u ispisu sadržaja dobijemo sa zastavicom -s.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/backup# cd ../data/
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# ls -las
+total 0
+0 drwxrwxrwx 1 user user 512 Apr  2 20:42 .
+0 drwxrwxrwx 1 user user 512 Apr  2 20:31 ..
+0 -rwxrwxrwx 1 user user  10 Apr  2 20:41 .env
+0 -rwxrwxrwx 1 user user  28 Apr  2 20:39 script.js
+0 -rwxrwxrwx 1 user user  36 Apr  2 20:40 style.css
+
+
+Zadatak 3
+
+- Jednom naredbom izbrišite sve datoteke u direktoriju data osim datoteke .env koristeći odgovarajuće zastavice. Ispišite detalje o radnji.
+
+ # Prvo sam ispisao sve datoteke u direktoriju data, pa i skrivene. Zatim sam sa naredbom rm i "wildcard-om" * obrisao sve datoteke. Po standardnim postavkama Linux OS, iako sam koristio wildcard Linux ne briše skrivene datoteke, tako da će .env ostati.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# ls -la
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 20:42 .
+drwxrwxrwx 1 user user 512 Apr  2 20:31 ..
+-rwxrwxrwx 1 user user  10 Apr  2 20:41 .env
+-rwxrwxrwx 1 user user  28 Apr  2 20:39 script.js
+-rwxrwxrwx 1 user user  36 Apr  2 20:40 style.css
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# rm *
+
+ # Na kraju sam ispisao preostale datoteke, ostala je .env.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/data# ls -la
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:00 .
+drwxrwxrwx 1 user user 512 Apr  2 20:31 ..
+-rwxrwxrwx 1 user user  10 Apr  2 20:41 .env
+
+- U direktorij data kopirajte sve datoteke iz direktorija backup koristeći odgovarajuću naredbu, ali spriječite prepisivanje datoteka koje već postoje. Ispišite detalje o radnji.
+
+ # Prvo sam ispisao sve datoteke u data folderu. Vidljiva je jedna skrivena .env koju sam od prije kreirao u 20:41 h.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/backup# ls -la ../data/
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:07 .
+drwxrwxrwx 1 user user 512 Apr  2 20:31 ..
+-rwxrwxrwx 1 user user  10 Apr  2 20:41 .env
+
+ # Nakon toga sam koristio naredbu cp sa zastavicom -r koja uključuje u operaciju i rekurizivno kopiranje direktorija i datoteka (ako ih ima), i sa zastavicom -n koja neće prepisati datoteke, ako već postoje u destinacijskom direktoriju - u ovom slučaju je to data direktorij.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/backup# cp -rn . ../data/
+
+ # Ispisao sam sve datoteke, vidljivo je da nove kopirane datoteke script.js i style.css imaju novo vrijeme kreiranja 21:12 h, dok .env nema novo vrijeme - to znači da nije prekucana preko postojeće datoteke.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/backup# ls -la ../data/
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:12 .
+drwxrwxrwx 1 user user 512 Apr  2 20:31 ..
+-rwxrwxrwx 1 user user  10 Apr  2 20:41 .env
+-rwxrwxrwx 1 user user  28 Apr  2 21:12 script.js
+-rwxrwxrwx 1 user user  36 Apr  2 21:12 style.css
+
+- Detaljno ispišite sadržaj direktorija data koji mora sadržavati skrivene datoteke osim pokazivača na trenutni i radni direktorij, sortirane po datumu zadnje izmjene i svaki zapis u novom redu.
+
+# Zastavica -l prikazuje svaku datoteku ili direktorij u novom redu, zastavica -A daje ispis bez trenutnog i radnog direktorija, a zastavica -t sortira po datumu zadnje izmjene.
+root@PC:/mnt/c/Users/user/Documents/GitHub/OS-vjezbe/vjezba_2/backup# ls -lAt
+total 0
+-rwxrwxrwx 1 user user 36 Apr  2 20:47 style.css
+-rwxrwxrwx 1 user user 28 Apr  2 20:47 script.js
+-rwxrwxrwx 1 user user 10 Apr  2 20:47 .env
+
+
+Zadatak 4
+
+- Otvorite direktorij na vašem računalu po želji, ali nek ne sadržava više od 20 datoteka - mora sadržavati ugniježđene direktorije s nekoliko datoteka unutar njih.
+- Prebacite se u direktorij i napišite sljedeće naredbe:
+
+- Izlistaj detaljno sadržaj glavnog direktorija, uključujući sve skrivene datoteke i sortiraj po veličini.
+
+# Prvo radim test u kojem se vidi da direktorij ne sadržava više od 20 datoteka i direktorija (ovo uključuje i direktorije).
+root@PC:/mnt/c/Users/user/Documents/za_vjezbe# ls -las | grep total
+total 13
+
+# Zatim prikazujem detaljan sadržaj glavnog direktorija (zastavica -l), uključene su skrivene datoteke (zastavica -a) i sortirane su po veličini (zastavica -s).
+root@PC:/mnt/c/Users/user/Documents/za_vjezbe# ls -las
+total 13
+0 drwxrwxrwx 1 user user 512 Apr  2 21:27 .
+0 drwxrwxrwx 1 user user 512 Apr  2 21:24 ..
+0 -rwxrwxrwx 1 user user  29 Apr  2 21:27 .skriveni
+0 drwxrwxrwx 1 user user 512 Apr  2 21:24 Pula
+0 drwxrwxrwx 1 user user 512 Apr  2 21:24 Zadar
+0 -rwxrwxrwx 1 user user 167 Apr  2 21:25 dijeljenje_s_nulom.cpp
+0 -rwxrwxrwx 1 user user 255 Apr  2 21:25 file_read.cpp
+0 drwxrwxrwx 1 user user 512 Apr  2 21:25 folder_1
+0 drwxrwxrwx 1 user user 512 Apr  2 21:24 folder_2
+4 -rwxrwxrwx 1 user user 868 Apr  2 21:25 funkcije_po_varijabli_i_po_referenci.cpp
+4 -rwxrwxrwx 1 user user 576 Apr  2 21:25 funkcije_s_nepoznatim_brojem_argumenata.cpp
+0 -rwxrwxrwx 1 user user 454 Apr  2 21:25 handler_dijeljenje_s_nulom.cpp
+0 -rwxrwxrwx 1 user user 236 Apr  2 21:25 nasumicnih_5_zadataka.cpp
+4 -rwxrwxrwx 1 user user 785 Apr  2 21:25 razlika_izmedu_pokazivaca_i_reference.cpp
+0 -rwxrwxrwx 1 user user 409 Apr  2 21:25 referenca_u_argumentu_funkcije.cpp
+0 -rwxrwxrwx 1 user user 454 Apr  2 21:25 reference_na_stacku.cpp
+0 -rwxrwxrwx 1 user user 266 Apr  2 21:25 rekurzija.cpp
+0 -rwxrwxrwx 1 user user 383 Apr  2 21:25 strcmp.cpp
+1 -rwxrwxrwx 1 user user 622 Apr  2 21:25 union.cpp
+
+Izlistaj detaljno sadržaj glavnog direktorija, bez skrivenih datoteka, sortiraj po veličini i prikaži jedinice (KB, MB, GB) uz veličinu datoteka.
+
+# Prikazao sam detaljno sadržaj glavnog direktorija (zastavica -l), ali nisam prikazao skrivene datoteke (što bi inače bila zastavica -a), sortirao sam po veličini (zastavica -s) i prikazao jedinice veličine (zastavica -h).
+root@PC:/mnt/c/Users/user/Documents/za_vjezbe# ls -lsh
+total 13K
+   0 drwxrwxrwx 1 user user 512 Apr  2 21:24 Pula
+   0 drwxrwxrwx 1 user user 512 Apr  2 21:24 Zadar
+   0 -rwxrwxrwx 1 user user 167 Apr  2 21:25 dijeljenje_s_nulom.cpp
+   0 -rwxrwxrwx 1 user user 255 Apr  2 21:25 file_read.cpp
+   0 drwxrwxrwx 1 user user 512 Apr  2 21:25 folder_1
+   0 drwxrwxrwx 1 user user 512 Apr  2 21:24 folder_2
+4.0K -rwxrwxrwx 1 user user 868 Apr  2 21:25 funkcije_po_varijabli_i_po_referenci.cpp
+4.0K -rwxrwxrwx 1 user user 576 Apr  2 21:25 funkcije_s_nepoznatim_brojem_argumenata.cpp
+   0 -rwxrwxrwx 1 user user 454 Apr  2 21:25 handler_dijeljenje_s_nulom.cpp
+   0 -rwxrwxrwx 1 user user 236 Apr  2 21:25 nasumicnih_5_zadataka.cpp
+4.0K -rwxrwxrwx 1 user user 785 Apr  2 21:25 razlika_izmedu_pokazivaca_i_reference.cpp
+   0 -rwxrwxrwx 1 user user 409 Apr  2 21:25 referenca_u_argumentu_funkcije.cpp
+   0 -rwxrwxrwx 1 user user 454 Apr  2 21:25 reference_na_stacku.cpp
+   0 -rwxrwxrwx 1 user user 266 Apr  2 21:25 rekurzija.cpp
+   0 -rwxrwxrwx 1 user user 383 Apr  2 21:25 strcmp.cpp
+1.0K -rwxrwxrwx 1 user user 622 Apr  2 21:25 union.cpp
+
+
+Izlistaj sav sadržaj direktorija (uključujući poddirektorije i njihove datoteke i skrivene datoteke), ispis neka bude u boji i sortiran po datumu zadnje izmjene (najnovije na početku).
+
+# Koristio sam zastavicu -l za prikaz zapisa u redovima, zastavicu -R za prikaz svih direktorija, i datoteka unutar direktorija, zastavicu -a za prikaz i skrivenih direktorija i datoteka, zastavicu -t za sortiranje i zastavicu -r za obrnuti redosljed (najnovije na početku).
+root@PC:/mnt/c/Users/user/Documents/za_vjezbe# ls -lRatr --color
+.:
+total 13
+drwxrwxrwx 1 user user 512 Apr  2 21:24 ..
+drwxrwxrwx 1 user user 512 Apr  2 21:24 folder_2
+drwxrwxrwx 1 user user 512 Apr  2 21:24 Zadar
+drwxrwxrwx 1 user user 512 Apr  2 21:24 Pula
+-rwxrwxrwx 1 user user 167 Apr  2 21:25 dijeljenje_s_nulom.cpp
+-rwxrwxrwx 1 user user 255 Apr  2 21:25 file_read.cpp
+-rwxrwxrwx 1 user user 868 Apr  2 21:25 funkcije_po_varijabli_i_po_referenci.cpp
+-rwxrwxrwx 1 user user 576 Apr  2 21:25 funkcije_s_nepoznatim_brojem_argumenata.cpp
+-rwxrwxrwx 1 user user 454 Apr  2 21:25 handler_dijeljenje_s_nulom.cpp
+-rwxrwxrwx 1 user user 236 Apr  2 21:25 nasumicnih_5_zadataka.cpp
+-rwxrwxrwx 1 user user 785 Apr  2 21:25 razlika_izmedu_pokazivaca_i_reference.cpp
+-rwxrwxrwx 1 user user 409 Apr  2 21:25 referenca_u_argumentu_funkcije.cpp
+-rwxrwxrwx 1 user user 454 Apr  2 21:25 reference_na_stacku.cpp
+-rwxrwxrwx 1 user user 266 Apr  2 21:25 rekurzija.cpp
+-rwxrwxrwx 1 user user 383 Apr  2 21:25 strcmp.cpp
+-rwxrwxrwx 1 user user 622 Apr  2 21:25 union.cpp
+drwxrwxrwx 1 user user 512 Apr  2 21:25 folder_1
+drwxrwxrwx 1 user user 512 Apr  2 21:27 .
+-rwxrwxrwx 1 user user  29 Apr  2 21:27 .skriveni
+
+./folder_2:
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:24 .
+drwxrwxrwx 1 user user 512 Apr  2 21:27 ..
+
+./Zadar:
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:24 .
+drwxrwxrwx 1 user user 512 Apr  2 21:27 ..
+
+./Pula:
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:24 .
+drwxrwxrwx 1 user user 512 Apr  2 21:27 ..
+
+./folder_1:
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:25 .
+drwxrwxrwx 1 user user 512 Apr  2 21:26 testiranje
+drwxrwxrwx 1 user user 512 Apr  2 21:27 ..
+
+./folder_1/testiranje:
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:25 ..
+drwxrwxrwx 1 user user 512 Apr  2 21:25 novo1
+drwxrwxrwx 1 user user 512 Apr  2 21:25 novo2
+drwxrwxrwx 1 user user 512 Apr  2 21:25 novo3
+drwxrwxrwx 1 user user 512 Apr  2 21:26 .
+-rwxrwxrwx 1 user user 409 Apr  2 21:26 novo
+
+./folder_1/testiranje/novo1:
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:25 .
+drwxrwxrwx 1 user user 512 Apr  2 21:26 ..
+
+./folder_1/testiranje/novo2:
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:25 .
+drwxrwxrwx 1 user user 512 Apr  2 21:26 ..
+
+./folder_1/testiranje/novo3:
+total 0
+drwxrwxrwx 1 user user 512 Apr  2 21:25 .
+drwxrwxrwx 1 user user 512 Apr  2 21:26 ..
